@@ -414,6 +414,14 @@ def main():
     df = load_stratified_sample(args.max_rows)
     df = clean_dataframe(df)
 
+    # 2. Exclure temporairement les classes trop rares
+    excluded_labels = [
+        "Infiltration",
+        "Heartbleed",
+    ]
+
+    df = df[~df["Label"].isin(excluded_labels)].copy()
+
     X, y, features = select_numeric_features(df)
 
     # Certaines classes tres rares peuvent ne pas permettre une separation fiable.
