@@ -120,7 +120,6 @@ def load_stratified_sample(max_rows: int) -> pd.DataFrame:
     """
     log.info("Chargement de %s...", DATASET_NAME)
     dataset_dict = load_dataset(DATASET_NAME)
-    dataset_dict.columns = [str(c).strip() for c in dataset_dict.columns]
 
     if "train" not in dataset_dict:
         raise ValueError(
@@ -128,7 +127,7 @@ def load_stratified_sample(max_rows: int) -> pd.DataFrame:
         )
 
     dataset = dataset_dict["train"]
-    if "Label" not in dataset.column_names:
+    if " Label" not in dataset.column_names:
         raise ValueError(
             f"Colonne Label absente. Colonnes : {dataset.column_names}"
         )
@@ -140,7 +139,7 @@ def load_stratified_sample(max_rows: int) -> pd.DataFrame:
 
     # Lire uniquement la colonne cible pour preparer les indices stratifies.
     labels = np.asarray(
-        [normalize_label(x) for x in dataset["Label"]],
+        [normalize_label(x) for x in dataset[" Label"]],
         dtype=object,
     )
     indices = np.arange(total)
