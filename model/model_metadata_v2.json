@@ -1,0 +1,36 @@
+{
+  "model_version": "V2",
+  "model_name": "IsolationForest",
+  "dataset": "c01dsnap/CIC-IDS2017",
+  "training_strategy": "one_class_training_on_BENIGN_only",
+  "split": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "n_train_normal": 163160,
+  "n_validation": 42756,
+  "n_test": 42756,
+  "n_features": 70,
+  "n_estimators": 300,
+  "max_samples": 512,
+  "contamination": "auto",
+  "random_state": 42,
+  "threshold": 0.4939786141054005,
+  "threshold_selection": "maximum F1-score on validation",
+  "created_at_utc": "2026-11-12T11:36:40.068594+00:00",
+  "validation_metrics": {
+    "precision_attack": 0.6470490716180372,
+    "recall_attack": 0.5008983572895277,
+    "f1_attack": 0.564670138888889
+  },
+  "test_metrics": {
+    "accuracy": 0.8552483861914117,
+    "precision_attack": 0.630473709913723,
+    "recall_attack": 0.4970482546201232,
+    "f1_attack": 0.5558665231431646,
+    "roc_auc": 0.7781374959858975,
+    "average_precision": 0.5021676014813867
+  },
+  "inference_note": "Conserver exactement les features et leur ordre. Appliquer le pipeline pour l'imputation, calculer -score_samples, puis comparer au seuil."
+}

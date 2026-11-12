@@ -1,0 +1,15 @@
+{
+  "validation": {
+    "precision_attack": 0.6470490716180372,
+    "recall_attack": 0.5008983572895277,
+    "f1_attack": 0.564670138888889
+  },
+  "test": {
+    "accuracy": 0.8552483861914117,
+    "precision_attack": 0.630473709913723,
+    "recall_attack": 0.4970482546201232,
+    "f1_attack": 0.5558665231431646,
+    "roc_auc": 0.7781374959858975,
+    "average_precision": 0.5021676014813867
+  }
+}

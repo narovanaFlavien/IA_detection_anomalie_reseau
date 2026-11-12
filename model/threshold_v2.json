@@ -1,0 +1,11 @@
+{
+  "score_definition": "-IsolationForest.score_samples(imputed_features)",
+  "decision_rule": "score >= threshold => anomalie (1), sinon normal (0)",
+  "threshold": 0.4939786141054005,
+  "selection": "maximum F1-score sur le jeu de validation",
+  "validation_metrics_at_threshold": {
+    "precision_attack": 0.6470490716180372,
+    "recall_attack": 0.5008983572895277,
+    "f1_attack": 0.564670138888889
+  }
+}
