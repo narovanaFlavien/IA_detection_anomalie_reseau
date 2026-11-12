@@ -1,0 +1,27 @@
+{
+  "model_name": "IsolationForest",
+  "dataset": "c01dsnap/CIC-IDS2017",
+  "training_strategy": "unsupervised_one_class_benign_only",
+  "normal_label": "BENIGN",
+  "anomaly_output": -1,
+  "normal_output": 1,
+  "evaluation_normal_value": 0,
+  "evaluation_anomaly_value": 1,
+  "n_features": 70,
+  "n_train_normal": 150000,
+  "n_test": 57007,
+  "n_test_normal": 46618,
+  "n_test_anomaly": 10389,
+  "n_estimators": 200,
+  "contamination": "auto",
+  "random_state": 42,
+  "created_at_utc": "2026-11-12T06:47:27.083490+00:00",
+  "metrics": {
+    "accuracy": 0.8437560299612328,
+    "precision_attack": 0.5876715570279224,
+    "recall_attack": 0.47810183848301085,
+    "f1_attack": 0.5272543920174089,
+    "roc_auc": 0.7706005395643798,
+    "average_precision": 0.4617963824695853
+  }
+}
