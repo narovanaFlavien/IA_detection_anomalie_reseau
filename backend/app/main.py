@@ -4,16 +4,27 @@ from fastapi import FastAPI
 
 from app.core.config import settings
 from app.api.v1.router import api_router
+from app.ml.model_service import ModelService
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Initialisation des ressources au démarrage
+
     print("Starting Network Anomaly Detection API...")
+
+    # Charger le modèle une seule fois au démarrage
+    app.state.model_service = ModelService.load(
+        model_path=settings.MODEL_PATH,
+        features_path=settings.FEATURES_PATH,
+        labels_path=settings.LABELS_PATH,
+        metadata_path=settings.METADATA_PATH,
+    )
 
     yield
 
-    # Nettoyage des ressources à l'arrêt
+    # Nettoyage à l'arrêt
+    app.state.model_service = None
+
     print("Stopping Network Anomaly Detection API...")
 
 
