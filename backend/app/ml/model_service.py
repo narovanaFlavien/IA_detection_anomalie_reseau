@@ -5,6 +5,8 @@ from pathlib import Path
 import joblib
 import pandas as pd
 
+from app.ml.feature_mapping import map_flow_to_model_features
+
 from app.ml.preprocessing import (
     load_feature_names,
     prepare_input,
@@ -95,19 +97,26 @@ class ModelService:
 
     def predict_one(self, flow: dict) -> dict:
         """
-        Effectue une prédiction sur un flow réseau.
+        Reçoit un flow CICFlowMeter brut et effectue
+        une classification avec Extra Trees.
         """
 
-        # Préparer les caractéristiques
-        dataframe = prepare_input(
+        # 1. Convertir les noms CICFlowMeter
+        mapped_flow = map_flow_to_model_features(
             flow,
             self.feature_names,
         )
 
-        # Classification
+        # 2. Construire le DataFrame dans le bon ordre
+        dataframe = prepare_input(
+            mapped_flow,
+            self.feature_names,
+        )
+
+        # 3. Prédiction
         prediction = self.model.predict(dataframe)[0]
 
-        # Calcul de la confiance si disponible
+        # 4. Confiance
         confidence = None
 
         if hasattr(self.model, "predict_proba"):
@@ -119,3 +128,4 @@ class ModelService:
             "confidence": confidence,
             "model_version": self.metadata["model_version"],
         }
+
