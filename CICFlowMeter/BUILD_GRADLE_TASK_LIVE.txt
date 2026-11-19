@@ -1,0 +1,21 @@
+// A ajouter dans build.gradle du dépôt complet.
+// L'archive fournie par l'utilisateur contenait src/ uniquement.
+task executeLive(type: JavaExec) {
+    main = 'cic.cs.unb.ca.ifm.LiveCaptureCli'
+    classpath = sourceSets.main.runtimeClasspath
+    systemProperty 'java.library.path',
+            file('jnetpcap/win/jnetpcap-1.4.r1425').absolutePath
+
+    if (project.hasProperty('listInterfaces')) {
+        args '--list-interfaces'
+    }
+    if (project.hasProperty('iface')) {
+        args '--interface', project.property('iface').toString()
+    }
+    if (project.hasProperty('output')) {
+        args '--output', project.property('output').toString()
+    }
+    if (project.hasProperty('append')) {
+        args '--append'
+    }
+}
